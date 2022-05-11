@@ -1,4 +1,4 @@
-﻿namespace BlazorApp.Store;
+﻿namespace BlazorApp.Store.CounterUseCase;
 
 public class SetCounterAction
 {
