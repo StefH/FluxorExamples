@@ -4,7 +4,7 @@ namespace BlazorApp.Store.CounterUseCase;
 
 // State should be decorated with [FeatureState] for automatic discovery when services.AddFluxor is called.
 [FeatureState]
-public class CounterState
+public record CounterState
 {
 	public int ClickCount { get; }
 

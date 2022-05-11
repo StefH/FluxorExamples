@@ -1,5 +1,4 @@
-﻿using BlazorApp.Store;
-using BlazorApp.Store.CounterUseCase;
+﻿using BlazorApp.Store.CounterUseCase;
 using Fluxor;
 using Microsoft.AspNetCore.Components;
 
@@ -10,7 +9,7 @@ public partial class Counter
 	[Inject]
 	private IState<CounterState> CounterState { get; set; } = null!;
 
-	[Inject] 
+	[Inject]
 	public IDispatcher Dispatcher { get; set; } = null!;
 
 	private void IncrementCount()
