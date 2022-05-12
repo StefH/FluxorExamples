@@ -1,0 +1,7 @@
+﻿@using Fluxor.Blazor.Web.Middlewares.Routing
+
+@inherits FluxorComponent
+
+@inject IState<RoutingState> RoutingState
+
+CurrentPage = @RoutingState.Value.Uri
