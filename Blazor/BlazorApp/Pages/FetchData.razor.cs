@@ -17,4 +17,9 @@ public partial class FetchData
 		base.OnInitialized();
 		Dispatcher.Dispatch(new FetchDataAction());
 	}
+
+	private void FetchNewData()
+	{
+		Dispatcher.Dispatch(new FetchDataAction());
+	}
 }

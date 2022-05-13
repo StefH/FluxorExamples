@@ -12,6 +12,8 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddFluxor(o =>
 {
 	o.ScanAssemblies(typeof(Program).Assembly);
+	o.UseRouting();
+
 #if DEBUG
 	o.UseReduxDevTools();
 #endif
