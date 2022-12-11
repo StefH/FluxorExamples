@@ -7,10 +7,10 @@ namespace BlazorApp.Pages;
 public partial class FetchData
 {
 	[Inject]
-	private IState<WeatherState> WeatherState { get; set; }
+	private IState<WeatherState> WeatherState { get; set; } = null!;
 
 	[Inject]
-	private IDispatcher Dispatcher { get; set; }
+	private IDispatcher Dispatcher { get; set; } = null!;
 
 	protected override void OnInitialized()
 	{
