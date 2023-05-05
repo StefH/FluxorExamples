@@ -13,9 +13,8 @@ public static class Reducers
 	// - Return a new state
 	[ReducerMethod(typeof(IncrementCounterAction))]
 	public static CounterState ReduceIncrementCounterAction(CounterState state) =>
-		new (ClickCount: state.ClickCount + 1);
-
-
+		new(ClickCount: state.ClickCount + 1);
+	
 
 	// The method name doesn't matter, but the signature does. The method must:
 	// - Have a [ReducerMethod] attribute
