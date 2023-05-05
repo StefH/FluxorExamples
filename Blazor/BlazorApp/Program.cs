@@ -9,13 +9,17 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-builder.Services.AddFluxor(o =>
+builder.Services.AddFluxor(fluxorOptions =>
 {
-	o.ScanAssemblies(typeof(Program).Assembly);
-	o.UseRouting();
+	// Scans the specified assembly for any Fluxor related code (states, reducers, etc).
+	fluxorOptions.ScanAssemblies(typeof(Program).Assembly);
+
+	// Registers the Routing Middleware that will be executed after every action dispatched.
+	fluxorOptions.UseRouting();
 
 #if DEBUG
-	o.UseReduxDevTools();
+	// Registers the Redux DevTools Middleware that will send state changes to the Redux DevTools extension.
+	fluxorOptions.UseReduxDevTools();
 #endif
 });
 
