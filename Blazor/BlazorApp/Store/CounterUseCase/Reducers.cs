@@ -6,11 +6,11 @@ namespace BlazorApp.Store.CounterUseCase;
 public static class Reducers
 {
 	// The method name doesn't matter, but the signature does. The method must:
+	// - Have a [ReducerMethod] attribute
 	// - Be public
 	// - Be static
 	// - Take one parameter: the current state
 	// - Return a new state
-	// - Have a [ReducerMethod] attribute
 	[ReducerMethod(typeof(IncrementCounterAction))]
 	public static CounterState ReduceIncrementCounterAction(CounterState state) =>
 		new (ClickCount: state.ClickCount + 1);
@@ -18,11 +18,11 @@ public static class Reducers
 
 
 	// The method name doesn't matter, but the signature does. The method must:
+	// - Have a [ReducerMethod] attribute
 	// - Be public
 	// - Be static
 	// - Take two parameters: the current state, and the action
 	// - Return a new state
-	// - Have a [ReducerMethod] attribute
 	[ReducerMethod]
 	public static CounterState ReduceSetCounterAction(CounterState state, SetCounterAction action) =>
 		new(ClickCount: action.ClickCount);
