@@ -16,6 +16,7 @@ public static class Reducers
 		new(ClickCount: state.ClickCount + 1);
 	
 
+
 	// The method name doesn't matter, but the signature does. The method must:
 	// - Have a [ReducerMethod] attribute
 	// - Be public

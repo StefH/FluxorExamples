@@ -15,24 +15,40 @@ public class FetchDataEffects
 		_httpClient = httpClient;
 	}
 
-	[EffectMethod]
-	public async Task HandleFetchDataAction(FetchDataAction action, IDispatcher dispatcher)
-	{
-		Cancel(true);
-
-		await Task.Delay(3000, _tokenSource!.Token);
-
-		var forecasts = await _httpClient.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json", _tokenSource.Token);
-		dispatcher.Dispatch(new FetchDataResultAction(forecasts));
-	}
-
 	// If anyone navigates anywhere, ensure it's cancelled. Needs FluxorOptions.UseRouting()
+	// It's possible to use [EffectMethod] without an action parameter.
+	// Note that the GoAction is defined in the Fluxor.Blazor.Web.Middlewares.Routing namespace.
 	[EffectMethod(typeof(GoAction))]
 	public Task HandleGo(IDispatcher _)
 	{
+		// Cancel any previous request
 		Cancel();
 
 		return Task.CompletedTask;
+	}
+
+	// If anyone navigates to the FetchData page, fetch the data.
+	[EffectMethod]
+	public async Task HandleFetchDataAction(FetchDataAction action, IDispatcher dispatcher)
+	{
+		// Cancel any previous request
+		Cancel(true);
+
+		// Simulate a long-running operation
+		try
+		{
+			await Task.Delay(3000, _tokenSource!.Token);
+		}
+		catch (OperationCanceledException)
+		{
+			Console.WriteLine("The task has been canceled.");
+			return;
+		}
+
+		var forecasts = await _httpClient.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json", _tokenSource.Token);
+
+		// Dispatch the result, but only if the token has not been cancelled.
+		dispatcher.Dispatch(new FetchDataResultAction(forecasts));
 	}
 
 	private void Cancel(bool createNew = false)
